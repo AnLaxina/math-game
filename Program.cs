@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 
 
 string[] validNumbers = new[] { "1", "2", "3", "4", "5", "6" };
+List<string> pastGames = new List<string>();
 Random random = new Random();
 
 MainMenu();
@@ -35,7 +36,7 @@ void MainMenu()
 
     int userChoice = int.Parse(userInput);
     Console.Clear();
-    Console.WriteLine("-------------------------------------------------------------------------------------------");
+    Console.WriteLine("-----------------------------------------------------------------");
     switch (userChoice)
     {
         case 1:
@@ -55,16 +56,26 @@ void MainMenu()
             MultiplicationGame();
             break;
         case 5:
-            Console.WriteLine("Your past games:");
+            Console.WriteLine("Here are your past games:");
+            if (pastGames.Count == 0)
+            {
+                Console.WriteLine("You have none!");
+                MainMenu();
+            }
+            else
+            {
+                ShowHistory();
+            }
+            
             break;
         case 6:
             Console.WriteLine("See you next time!");
-            Console.WriteLine("-------------------------------------------------------------------------------------------");
+            Console.WriteLine("-----------------------------------------------------------------");
             Environment.Exit(0);
             break;
     }
 
-    Console.WriteLine("-------------------------------------------------------------------------------------------");
+    
 }
 
 void AdditionGame()
@@ -96,8 +107,11 @@ void AdditionGame()
             score++;
         }
     }
+    // Adds the score to the past history of games
+    pastGames.Add($"Addition Score: {score}/4");
     // Once the user finishes the quiz, the end screen appears
     Console.WriteLine($"Here is your score: {score}/4!");
+    Console.WriteLine("-----------------------------------------------------------------");
     Console.WriteLine("Please input the following option: 1. Play again 2. Return to the menu 3. Exit");
     var finalInput = Console.ReadLine();
     string[] validInputs = new[] { "1", "2", "3" };
@@ -108,11 +122,12 @@ void AdditionGame()
         Console.Write("You entered an invalid input! Please try again: ");
         finalInput = Console.ReadLine();
     }
-
+    
     switch (int.Parse(finalInput))
     {
         case 1:
             Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------");
             Console.WriteLine("Welcome back!");
             AdditionGame();
             break;
@@ -158,8 +173,11 @@ void SubtractionGame()
             score++;
         }
     }
+    // Adds the score to the past history of games
+    pastGames.Add($"Subtraction Score: {score}/4");
     // Once the user finishes the quiz, the end screen appears
     Console.WriteLine($"Here is your score: {score}/4!");
+    Console.WriteLine("-----------------------------------------------------------------");
     Console.WriteLine("Please input the following option: 1. Play again 2. Return to the menu 3. Exit");
     var finalInput = Console.ReadLine();
     string[] validInputs = new[] { "1", "2", "3" };
@@ -175,6 +193,7 @@ void SubtractionGame()
     {
         case 1:
             Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------");
             Console.WriteLine("Welcome back!");
             SubtractionGame();
             break;
@@ -221,8 +240,11 @@ void DivisionGame()
             score++;
         }
     }
+    // Adds the score to the past history of games
+    pastGames.Add($"Division Score: {score}/4");
     // Once the user finishes the quiz, the end screen appears
     Console.WriteLine($"Here is your score: {score}/4!");
+    Console.WriteLine("-----------------------------------------------------------------");
     Console.WriteLine("Please input the following option: 1. Play again 2. Return to the menu 3. Exit");
     var finalInput = Console.ReadLine();
     string[] validInputs = new[] { "1", "2", "3" };
@@ -238,6 +260,7 @@ void DivisionGame()
     {
         case 1:
             Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------");
             Console.WriteLine("Welcome back!");
             DivisionGame();
             break;
@@ -282,8 +305,11 @@ void MultiplicationGame()
             score++;
         }
     }
+    // Adds the score to the past history of games
+    pastGames.Add($"Multiplication Score: {score}/4");
     // Once the user finishes the quiz, the end screen appears
     Console.WriteLine($"Here is your score: {score}/4!");
+    Console.WriteLine("-----------------------------------------------------------------");
     Console.WriteLine("Please input the following option: 1. Play again 2. Return to the menu 3. Exit");
     var finalInput = Console.ReadLine();
     string[] validInputs = new[] { "1", "2", "3" };
@@ -299,6 +325,7 @@ void MultiplicationGame()
     {
         case 1:
             Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------");
             Console.WriteLine("Welcome back!");
             MultiplicationGame();
             break;
@@ -309,6 +336,39 @@ void MultiplicationGame()
         case 3:
             Console.Clear();
             Console.Write("Thank you for playing!");
+            Environment.Exit(0);
+            break;
+    }
+}
+
+void ShowHistory()
+{
+    int num = 1;
+    foreach (var game in pastGames)
+    {
+        Console.WriteLine($"{num}. {game}");
+        num++;
+    }
+    Console.WriteLine("-----------------------------------------------------------------");
+    Console.WriteLine("Please input the following option: 1. Return to menu 2. Quit");
+    var userInput = Console.ReadLine();
+    
+    
+    string[] validInputs = new[] { "1", "2" };
+    while (!validInputs.Contains(userInput))
+    {
+        Console.Write("Please input a valid number! Try again: ");
+    }
+
+    switch (int.Parse(userInput))
+    {
+        case 1:
+            Console.Clear();
+            MainMenu();
+            break;
+        case 2:
+            Console.Clear();
+            Console.WriteLine("See you next time!");
             Environment.Exit(0);
             break;
     }
