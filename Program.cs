@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 DateTime fullDate = DateTime.Now;
 DateOnly today = DateOnly.FromDateTime(fullDate);
 TimeOnly currentTime = TimeOnly.FromDateTime(fullDate);
-List<string> validNumbers = new List<string> { "1", "2", "3", "4" };
+string[] validNumbers = new[] { "1", "2", "3", "4", "5", "6" };
 Random random = new Random();
 
 MainMenu();
@@ -18,7 +18,7 @@ void MainMenu()
         $@"Welcome to the math game! The date is {today.ToString("MMMM")} {today.Day}, {today.Year} and the time is: {currentTime}!");
     Console.WriteLine(
         "Please input the number based on the following options below and press the ENTER key once done: ");
-    Console.WriteLine("1. Addition 2. Subtraction 3. Division 4. Multiplication");
+    Console.WriteLine("1. Addition 2. Subtraction 3. Division 4. Multiplication 5. See past games 6. Quit");
     Console.WriteLine("-----------------------------------------------------------------");
     string userInput = Console.ReadLine();
 
@@ -49,6 +49,13 @@ void MainMenu()
             break;
         case 4:
             Console.WriteLine("Multiplication selected!");
+            break;
+        case 5:
+            Console.WriteLine("Your past games:");
+            break;
+        case 6:
+            Console.WriteLine("See you next time!");
+            Environment.Exit(0);
             break;
     }
 
