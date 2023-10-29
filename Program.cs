@@ -33,7 +33,7 @@ void MainMenu()
 
     int userChoice = int.Parse(userInput);
     Console.Clear();
-    Console.WriteLine("-----------------------------------------------------------------");
+    Console.WriteLine("-------------------------------------------------------------------------------------------");
     switch (userChoice)
     {
         case 1:
@@ -46,6 +46,7 @@ void MainMenu()
             break;
         case 3:
             Console.WriteLine("Division selected!");
+            DivisionGame();
             break;
         case 4:
             Console.WriteLine("Multiplication selected!");
@@ -55,11 +56,12 @@ void MainMenu()
             break;
         case 6:
             Console.WriteLine("See you next time!");
+            Console.WriteLine("-------------------------------------------------------------------------------------------");
             Environment.Exit(0);
             break;
     }
 
-    Console.WriteLine("-----------------------------------------------------------------");
+    Console.WriteLine("-------------------------------------------------------------------------------------------");
 }
 
 void AdditionGame()
@@ -184,3 +186,69 @@ void SubtractionGame()
             break;
     }
 }
+
+void DivisionGame()
+{
+    var score = 0;
+    Console.WriteLine("You will solve 4 questions total! Your score will be shown once you finish!");
+
+    for (int i = 0; i < 4; i++)
+    {
+        var dividend = random.Next(0, 11);
+        var divisor = random.Next(1, 11);
+        var product = dividend * divisor;
+        
+        Console.Write($"{product} / {divisor} = ");
+        var userAnswer = Console.ReadLine();
+
+        int number;
+        bool isInt = int.TryParse(userAnswer, out number);
+        
+        // Checks to see if the user input is an integer
+        // If not, the loop will repeat its current iteration and try again until the user inputs a valid one.
+        if (!isInt)
+        {
+            Console.WriteLine("You have entered an incorrect input! Please try again.");
+            i--;
+            continue;
+        }
+        // Checks the user score
+        if (product / divisor == number)
+        {
+            score++;
+        }
+    }
+    // Once the user finishes the quiz, the end screen appears
+    Console.WriteLine($"Here is your score: {score}/4!");
+    Console.WriteLine("Please input the following option: 1. Play again 2. Return to the menu 3. Exit");
+    var finalInput = Console.ReadLine();
+    string[] validInputs = new[] { "1", "2", "3" };
+    // Checks to see if the input has entered one of the three options above
+    // If not, it continues to loop until the user enters a valid input
+    while (!validInputs.Contains(finalInput))
+    {
+        Console.Write("You entered an invalid input! Please try again: ");
+        finalInput = Console.ReadLine();
+    }
+
+    switch (int.Parse(finalInput))
+    {
+        case 1:
+            Console.Clear();
+            Console.WriteLine("Welcome back!");
+            DivisionGame();
+            break;
+        case 2:
+            Console.Clear();
+            MainMenu();
+            break;
+        case 3:
+            Console.Clear();
+            Console.Write("Thank you for playing!");
+            Environment.Exit(0);
+            break;
+    }
+}
+
+
+
