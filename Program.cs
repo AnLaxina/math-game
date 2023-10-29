@@ -86,7 +86,7 @@ void AdditionGame()
     }
     // Once the user finishes the quiz, the end screen appears
     Console.WriteLine($"Here is your score: {score}/4!");
-    Console.Write("Please input the following option the following option: 1. Play again 2. Return to the menu 3. Exit");
+    Console.WriteLine("Please input the following option the following option: 1. Play again 2. Return to the menu 3. Exit");
     var finalInput = Console.ReadLine();
     string[] validInputs = new[] { "1", "2", "3" };
     // Checks to see if the input has entered one of the three options above
