@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 DateTime fullDate = DateTime.Now;
 DateOnly today = DateOnly.FromDateTime(fullDate);
 TimeOnly currentTime = TimeOnly.FromDateTime(fullDate);
-List<string> validNumbers = new List<string>{"1", "2", "3", "4"};
+List<string> validNumbers = new List<string> { "1", "2", "3", "4" };
 Random random = new Random();
 
 MainMenu();
@@ -57,24 +57,62 @@ void MainMenu()
 
 void AdditionGame()
 {
-    var isValid = true;
     var score = 0;
     Console.WriteLine("You will solve 4 questions total! Your score will be shown once you finish!");
-    
-    while (isValid)
+
+    for (int i = 0; i < 4; i++)
     {
         var num1 = random.Next(1, 101);
         var num2 = random.Next(1, 101);
         Console.Write($"{num1} + {num2} = ");
         var userAnswer = Console.ReadLine();
-        if (!userAnswer.GetType().ToString().Equals("System.Int32"))
+
+        int number;
+        bool isInt = int.TryParse(userAnswer, out number);
+        
+        // Checks to see if the user input is an integer
+        // If not, the loop will repeat its current iteration and try again until the user inputs a valid one.
+        if (!isInt)
         {
-            Console.WriteLine(userAnswer.GetType());
-            isValid = false;
+            Console.WriteLine("You have entered an incorrect input! Please try again.");
+            i--;
+            continue;
         }
-
+        // Checks the user score
+        if (num1 + num2 == number)
+        {
+            score++;
+        }
     }
+    // Once the user finishes the quiz, the end screen appears
+    Console.WriteLine($"Here is your score: {score}/4!");
+    Console.Write("Please input the following option the following option: 1. Play again 2. Return to the menu 3. Exit");
+    var finalInput = Console.ReadLine();
+    string[] validInputs = new[] { "1", "2", "3" };
+    // Checks to see if the input has entered one of the three options above
+    // If not, it continues to loop until the user enters a valid input
+    while (!validInputs.Contains(finalInput))
+    {
+        Console.Write("You entered an invalid input! Please try again: ");
+        finalInput = Console.ReadLine();
+    }
+
+    switch (int.Parse(finalInput))
+    {
+        case 1:
+            Console.Clear();
+            Console.WriteLine("Welcome back!");
+            AdditionGame();
+            break;
+        case 2:
+            Console.Clear();
+            MainMenu();
+            break;
+        case 3:
+            Console.Clear();
+            Console.Write("Thank you for playing!");
+            Environment.Exit(0);
+            break;
+    }
+    
 }
-
-
-
