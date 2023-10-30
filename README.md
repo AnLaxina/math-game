@@ -2,6 +2,7 @@
 
 ## Introduction
 A very simple math game written entirely in C#. 
+![Math Game .gif](resources/MathGame.gif)
 
 ### Instructions
 1. Go to the `Releases` tab and download MathGame.exe from `Math Game Version 1.1`
