@@ -358,6 +358,7 @@ void ShowHistory()
     while (!validInputs.Contains(userInput))
     {
         Console.Write("Please input a valid number! Try again: ");
+        userInput = Console.ReadLine();
     }
 
     switch (int.Parse(userInput))
