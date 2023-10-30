@@ -1,2 +1,0 @@
-C:\Users\anilo\C#Academy\MathGame\bin\Release\net7.0\win10-x64\publish\MathGame.pdb
-C:\Users\anilo\C#Academy\MathGame\bin\Release\net7.0\win10-x64\publish\MathGame.exe
